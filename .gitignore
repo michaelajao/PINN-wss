@@ -8,3 +8,8 @@ model_02 1/model_02/*.pt
 aneurysm_pinns/*.csv
 model_02 1/model_02/*.csv
 aneurysm_pinns/models/*.pt
+aneurysm_pinns/checkpoints/*.pt
+model_02 1/model_02/checkpoints/*.pt
+model_02 1/model_02/best_models/*.pt
+model_02 1/model_02/data/*.csv
+model_02 1/model_02/models/*.pt
