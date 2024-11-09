@@ -1,0 +1,10 @@
+Data/3D-aneurysm/IA_nearwall_wall_small.vtk
+Data/3D-aneurysm/IA_nearwall_outer_small.vtk
+Data/3D-aneurysm/IA_mesh3D_nearwall_small_physical.vtu
+Data/3D-aneurysm/IA_3D_unsteady3.vtu
+aneurysm_pinns/best_models/*.pt
+aneurysm_pinns/*.pt
+model_02 1/model_02/*.pt
+aneurysm_pinns/*.csv
+model_02 1/model_02/*.csv
+aneurysm_pinns/models/*.pt

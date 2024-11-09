@@ -765,13 +765,13 @@ Flag_physical = True #False #True #IF True use the physical mesh, not the normal
 
 if (Flag_physical):
 	#mesh_file = "/home/aa3878/Data/ML/Amir/IA/IA_mesh_physical000000.vtu"
-	mesh_file = "/home/aa3878/Data/ML/Amir/IA/3D/IA3D_nearwall_correct.vtu"
+	mesh_file = "../Data/3D-aneurysm/IA3D_nearwall_correct.vtu"
 else:
-	mesh_file = "/home/aa3878/Data/ML/Amir/IA/3D/IA_mesh_correct_crop.vtu"
+	mesh_file = "../Data/3D-aneurysm/IA_mesh_correct_crop.vtu"
 
 #output_filename = "/home/aa3878/Data/ML/Amir/IA/Results/IA_PINN_crop.vtk"
 #output_filename = "/home/aa3878/Data/ML/Amir/IA/Results/IA_PINN_data.vtk"
-output_filename = "/home/aa3878/Data/ML/Amir/IA/3D/Results/IA_PINN_3Ddata.vtk"
+output_filename = "../Data/3D-aneurysm/Results/IA_PINN_3Ddata.vtk"
 
 #NN_filename_prefix = "IAcrop_" 
 NN_filename_prefix = "IA3D_data3vel_" 
