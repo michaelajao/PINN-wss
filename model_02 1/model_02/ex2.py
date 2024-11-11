@@ -320,11 +320,11 @@ num_layers = 12  # Number of layers
 units_per_layer = 256  # Number of neurons per layer
 activation_function = "silu"  # Activation function ('relu', 'tanh', 'silu', 'elu', 'leaky_relu')
 
-epochs = 500  # Number of training epochs
+epochs = 1000  # Number of training epochs
 load_previous = False  # Whether to load a pretrained model
 save_end = True  # Whether to save the model at the end
-load_fn = "ns_34_4"  # Filename to load the pretrained model
-save_fn = "ns_34_4"  # Filename to save the model
+load_fn = "ns_34_5"  # Filename to load the pretrained model
+save_fn = "ns_34_5"  # Filename to save the model
 
 print_every = 10  # Frequency of printing training progress
 save_every = 100  # Frequency of saving model checkpoints
@@ -426,17 +426,17 @@ def init_weights_kaiming(m):
 model.apply(init_weights_kaiming)
 
 ###################################### Initialize Optimizer and Scheduler
-optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=lr_factor, patience=lr_patience, verbose=True, min_lr=min_lr)
 
 ###################################### Load a Pretrained Model (if applicable)
 if load_previous:
     try:
-        model, optimizer, scheduler, loaded_params = load_model(f"models/{save_fn}1.pt", model, optimizer, scheduler)
+        model, optimizer, scheduler, loaded_params = load_model(f"models/{save_fn}2.pt", model, optimizer, scheduler)
         if loaded_params is not None:
-            print(f"Loaded training parameters from models/{save_fn}1.pt")
+            print(f"Loaded training parameters from models/{save_fn}2.pt")
     except FileNotFoundError:
-        print(f"Pretrained model 'models/{save_fn}1.pt' not found. Proceeding without loading.")
+        print(f"Pretrained model 'models/{save_fn}2.pt' not found. Proceeding without loading.")
 
 ###################################### TRAIN THE MODEL
 print(f"Starting the training phase on {device} ...")
@@ -596,7 +596,7 @@ for epoch in tqdm(range(1, epochs + 1), desc="Epochs"):
         patience_counter = 0
         # Save the best model
         save_model(
-            f"best_models/{save_fn}_best1.pt",
+            f"best_models/{save_fn}_best2.pt",
             model,
             optimizer,
             scheduler,
@@ -630,25 +630,25 @@ for epoch in tqdm(range(1, epochs + 1), desc="Epochs"):
     # Save model periodically
     if epoch % save_every == 0:
         save_model(
-            f"checkpoints/{save_fn}_epoch_{epoch}1.pt",
+            f"checkpoints/{save_fn}_epoch_{epoch}2.pt",
             model,
             optimizer,
             scheduler,
             training_params,
         )
-        print(f"Model saved to checkpoints/{save_fn}_epoch_{epoch}1.pt")
+        print(f"Model saved to checkpoints/{save_fn}_epoch_{epoch}2.pt")
 
 print("Training phase complete.")
 
 ###################################### SAVE THE TRAINED MODEL
 if save_end:
-    save_model(f"models/{save_fn}1.pt", model, optimizer, scheduler, training_params)
-    print(f"Model saved to models/{save_fn}1.pt")
+    save_model(f"models/{save_fn}2.pt", model, optimizer, scheduler, training_params)
+    print(f"Model saved to models/{save_fn}2.pt")
 
 ###################################### EVALUATE THE MODEL AND PLOT PRESSURE & Velocity Field Comparison
 
 # Load the best saved model
-best_model_path = f"best_models/{save_fn}_best1.pt"
+best_model_path = f"best_models/{save_fn}_best2.pt"
 try:
     model, _, _, _ = load_model(best_model_path, model)
     print(f"Loaded the best model from {best_model_path}")
@@ -911,7 +911,7 @@ fig.colorbar(sc8, ax=ax[2, 2], fraction=0.02, pad=0.005)
 case_number = 1  # You can parameterize this as needed
 
 fig.suptitle(f"Pressure and Velocity Field Comparison: Case {case_number}", fontsize=20)
-plt.savefig(f"./plots/fields_comparison_case_{case_number}1.png", bbox_inches='tight')
+plt.savefig(f"./plots/fields_comparison_case_{case_number}2.png", bbox_inches='tight')
 plt.show()
 
 # Plot Total Loss Over Epochs
@@ -923,7 +923,7 @@ plt.title("Total Loss Over Epochs")
 plt.yscale('log')  # Logarithmic scale
 plt.legend()
 plt.grid(False)  # Remove grid
-plt.savefig(f"./plots/total_loss_case_{case_number}1.png", bbox_inches='tight')
+plt.savefig(f"./plots/total_loss_case_{case_number}2.png", bbox_inches='tight')
 plt.show()
 
 # Plot Physics Loss Over Epochs
@@ -935,7 +935,7 @@ plt.title("Physics Loss Over Epochs")
 plt.yscale('log')  # Logarithmic scale
 plt.legend()
 plt.grid(False)  # Remove grid
-plt.savefig(f"./plots/physics_loss_case_{case_number}1.png", bbox_inches='tight')
+plt.savefig(f"./plots/physics_loss_case_{case_number}2.png", bbox_inches='tight')
 plt.show()
 
 # Plot Data Loss Over Epochs
@@ -947,7 +947,7 @@ plt.title("Data Loss Over Epochs")
 plt.yscale('log')  # Logarithmic scale
 plt.legend()
 plt.grid(False)  # Remove grid
-plt.savefig(f"./plots/data_loss_case_{case_number}1.png", bbox_inches='tight')
+plt.savefig(f"./plots/data_loss_case_{case_number}2.png", bbox_inches='tight')
 plt.show()
 
 # Plot Validation Loss Over Epochs
@@ -959,5 +959,5 @@ plt.title("Validation Loss Over Epochs")
 plt.yscale('log')  # Logarithmic scale
 plt.legend()
 plt.grid(False)  # Remove grid
-plt.savefig(f"./plots/validation_loss_case_{case_number}1.png", bbox_inches='tight')
+plt.savefig(f"./plots/validation_loss_case_{case_number}2.png", bbox_inches='tight')
 plt.show()
