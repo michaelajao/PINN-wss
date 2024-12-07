@@ -28,4 +28,4 @@ for sc in range(1,4):
 
     fig.suptitle(f'Pressure Field Comparison: Case {sc}')
     plt.savefig(f'p_case_{sc}.png')
-    # plt.show()
+    plt.show()
